@@ -11,10 +11,10 @@ STEP 2: Save the .mjpeg file in a directory (name it something easy fx. 3D_foota
 
 Step 3: Open the Terminal/Cmd-prompt on the machine.
 
-STEP 4: Change the directory to the directory with the footage, example given: -cd path/to/desired/directory
+STEP 4: Change the directory to the directory with the footage, example given: -cd "path\to\desired\directory"
 
-STEP 5: Call the Python script from this repository. The command called has four variables (ORIGINAL_FOOTAGE.mjpeg, CONVERTED_FOOTAGE.mp4, LEFT_CAMERA_FOOTAGE.mp4, RIGHT_CAMERA_FOOTAGE.mp4). Example given: python -
-split_test.py -NAME.mjpeg -NEW_NAME.mp4 -LEFT_VIDEO.mp4 -RIGHT_VIDEO.mp4
+STEP 5: Call the Python script from this repository. The command called has four variables (ORIGINAL_FOOTAGE.mjpeg, CONVERTED_FOOTAGE.mp4, LEFT_CAMERA_FOOTAGE.mp4, RIGHT_CAMERA_FOOTAGE.mp4). Example given: python 
+split_test.py "NAME.mjpeg" "NEW_NAME.mp4" "LEFT_VIDEO.mp4" "RIGHT_VIDEO.mp4"
 
 STEP 6: The processed files should all be downloaded to the same directory
 
