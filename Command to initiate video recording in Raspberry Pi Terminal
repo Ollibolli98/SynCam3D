@@ -1,0 +1,3 @@
+libcamera-vid --codec mjpeg -t X_AMOUNT_OF_TIME_IN_MILLISECONDS -o FILENAME.mjpeg --width 3840 --height 1080 --save-pts FILENAME.txt --saturation 1
+
+Example: libcamera-vid --codec mjpeg -t 60000 -o Test_nr_1.mjpeg --width 3840 --height 1080 --save-pts Timestamp_Test_nr_1.txt --saturation 1
