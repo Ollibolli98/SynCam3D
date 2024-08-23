@@ -1,0 +1,99 @@
+import cv2
+import subprocess
+import os
+import sys
+def process_video(input_file, output_file, left_output_file, right_output_file):
+
+    # Open the input video file
+    video = cv2.VideoCapture(input_file)
+
+    # Get the total number of frames in the video
+    total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+
+    # Set the video writer properties
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    output_video = cv2.VideoWriter(output_file, fourcc, 30.0, (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+
+    # Process each frame of the video
+    while True:
+        # Read the next frame of the video
+        ret, frame = video.read()
+
+        # Break the loop if the video is finished
+        if not ret:
+            break
+
+        # Flip the frame vertically and horizontally
+        frame = cv2.flip(frame, 0)
+        frame = cv2.flip(frame, 1)
+
+        # Write the modified frame to the output video file
+        output_video.write(frame)
+
+    # Release the video file and the output video file
+    video.release()
+    output_video.release()
+    cv2.destroyAllWindows()
+
+    # Split the output video file into two halves using ffmpeg
+    subprocess.run(["ffmpeg", "-i", output_file, "-filter_complex", "[0:v]split=2[left][right];[left]crop=iw/2:ih:0:0[left_crop];[right]crop=iw/2:ih:iw/2:0[right_crop]", "-map", "[left_crop]", "left_vid.mp4", "-map", "[right_crop]", "right_vid.mp4"])
+
+    # Open the left and right video files
+    left_video = cv2.VideoCapture('left_vid.mp4')
+    right_video = cv2.VideoCapture('right_vid.mp4')
+
+    # Set the video writer properties for the output videos with frame numbers
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    left_output = cv2.VideoWriter(left_output_file, fourcc, 30.0, (int(left_video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(left_video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+    right_output = cv2.VideoWriter(right_output_file, fourcc, 30.0, (int(right_video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(right_video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+
+    # Initialize the frame counter
+    frame_counter = 0
+
+    # Process each frame of the left and right video files
+    while True:
+        # Read the next frame of the left video file
+        ret_left, left_frame = left_video.read()
+
+        # Read the next frame of the right video file
+        ret_right, right_frame = right_video.read()
+
+        # Break the loop if either video file is finished
+        if not ret_left or not ret_right:
+            break
+
+        # Add the frame number to the top right corner of the left and right frames
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(left_frame, str(frame_counter), (10, left_frame.shape[0] - 10), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(right_frame, str(frame_counter), (10, right_frame.shape[0] - 10), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
+        # Write the modified frames to the output video files
+        left_output.write(left_frame)
+        right_output.write(right_frame)
+
+        # Increment the frame counter
+        frame_counter += 1
+
+    # Release the left and right video files and the output video files
+    left_video.release()
+    right_video.release()
+    left_output.release()
+    right_output.release()
+    cv2.destroyAllWindows()
+
+    # Delete the temporary files
+    os.remove('left_vid.mp4')
+    os.remove('right_vid.mp4')
+
+if __name__ == "__main__":
+    if len(sys.argv) != 5:
+        print("Usage: python script.py <input_file> <output_file> <left_output_file> <right_output_file>")
+        sys.exit(1)
+
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+    left_output_file = sys.argv[3]
+    right_output_file = sys.argv[4]
+
+    process_video(input_file, output_file, left_output_file, right_output_file)
+
