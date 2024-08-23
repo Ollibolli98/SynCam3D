@@ -13,7 +13,7 @@ Step 3: Open the Terminal/Cmd-prompt on the machine.
 
 STEP 4: Change the directory to the directory with the footage, example given: -cd "path\to\desired\directory"
 
-STEP 5: Call the Python command. The command called has four variables (ORIGINAL_FOOTAGE.mjpeg, CONVERTED_FOOTAGE.mp4, LEFT_CAMERA_FOOTAGE.mp4, RIGHT_CAMERA_FOOTAGE.mp4). 
+STEP 5: Call the Python script. The command called has four variables (ORIGINAL_FOOTAGE.mjpeg, CONVERTED_FOOTAGE.mp4, LEFT_CAMERA_FOOTAGE.mp4, RIGHT_CAMERA_FOOTAGE.mp4). 
 Example given: 
 directory\with\footage: python split_test.py "NAME.mjpeg" "NEW_NAME.mp4" "LEFT_VIDEO.mp4" "RIGHT_VIDEO.mp4"
 
