@@ -1,0 +1,24 @@
+How to install Python, OpenCV and ffmpeg to convert stereo mpeg Arducam recording to 3 mp4 files-stereo as well as left and right - and rotated:
+Made by Ólavur av Fløtum Mittún (rpn797@alumni.ku.dk)
+
+STEP 1: download Python from http://www.Python.org
+
+STEP 2: Install Python - customize installation and "install for all users" and select "Add Python to Environment variables".
+Info concerning how to install Python: https://phoenixnap.com/kb/how-to-install-python-3-windows Test that Python is installed - cmc - python --version
+
+STEP 3: Install OpenCV for Python:
+cmd
+Pip install opencv-python
+Remember to add following path:
+C:\Users\JFSteffensen\AppData\Roaming\Python\Python312\Scripts
+
+STEP 4: Install ffmpeg for python: https://www.gyan.dev/ffmpeg/builds/ Download - Ffmpeg-git-full.7z
+Remember to add the path - and a copy of the path including\bin:
+Test if ffmepeg is installed by from cmd type ffmpeg
+Cmd Python
+
+STEP 5: Copy directory 3D-Cam to C, D or .. drive
+To run Olavurs script:
+Cdm
+Python Split_test.py "Ffinal_test.mjpeg" "test.mp4" "I.mp4" "ropffmpeg te.mp4"
+"C:\Users\JFSteffensen\AppData\Roaming\Python\Python312\site-packages\ffmpeg"
