@@ -9,7 +9,7 @@ STEP 1: Make sure the machine you are using has all the softwares correctly inst
 
 STEP 2: Save the .mjpeg file and the python script (split_test.py) in a directory (name it something easy fx. 3D_footage).
 
-Step 3: Open the Terminal/Cmd-prompt on the machine.
+STEP 3: Open the Terminal/Cmd-prompt on the machine.
 
 STEP 4: Change the directory to the directory with the footage, example given: -cd "path\to\desired\directory"
 
